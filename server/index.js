@@ -23,6 +23,13 @@ const server = http.createServer(app);
 // Initialize a new instance of Socket.IO by passing the HTTP server
 const io = socketio(server);
 
+io.on('connection', (socket) => {
+  console.log(`We have a new connection!!!`)
+  socket.on('disconnect', () => {
+    console.log('User had left!!!');
+  })
+})
+
 // Use the custom router for handling HTTP requests
 app.use(router);
 

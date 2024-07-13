@@ -7,11 +7,11 @@ import Chat from './components/Chat'
 function App() {
   return (
     <>
-      <h1>chat</h1>
+      {/* <h1>chat</h1> */}
       <Router>
         <Routes>
-          <Route path="/" exact component={Join} />
-          <Route path="/chat" exact component={Chat} />
+          <Route path="/" exact element={<Join/>} />
+          <Route path="/chat" element={<Chat/>} />
         </Routes>
       </Router>
     </>
