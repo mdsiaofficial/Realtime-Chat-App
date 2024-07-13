@@ -14,7 +14,7 @@ const Chat = () => {
   const ENDPOINT = `localhost:${PORT}`;
 
   useEffect(() => {
-    const {name, room} = queryString.parse(location.search)
+    const { name, room } = queryString.parse(location.search)
     // console.log(data);
     // console.log(location.search);
 
@@ -25,10 +25,22 @@ const Chat = () => {
     console.log(name, room);
     console.log(socket);
 
-    socket.emit('join', { name, room });
+    socket.emit('join', { name, room }, () => {
+      
+    });
     
+    return () => {
+      socket.emit('disconnect');
+      socket.off();
+    }
 
-  }, [ENDPOINT, location.search])
+  }, [ENDPOINT, location.search]);
+
+  useEffect(() => {
+    socket.on('message', (message) => {
+      console.log(message)
+    })
+  },[])
 
 
   return (
