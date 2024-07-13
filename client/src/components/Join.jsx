@@ -1,13 +1,8 @@
-
+import React from 'react'
 
 const Join = () => {
   return (
-    <>
-      <h1 className=' text-2xl bg-red-500 text-white'>
-        Chat App Join
-      </h1>
-
-    </>
+    <div>Join</div>
   )
 }
 
