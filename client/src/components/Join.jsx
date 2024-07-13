@@ -9,7 +9,7 @@ const Join = () => {
   return (
     <div>
       <div className='flex justify-center text-center items-center bg-gray-600'>
-        <h1 className=' text-5xl bg-purple-500 rounded-2xl p-3 absolute top-20 text-center'>Realtime Chat App</h1>
+        <h1 className=' text-5xl bg-purple-500 rounded-2xl p-3 absolute top-10 text-center'>Realtime Chat App</h1>
 
       </div>
 

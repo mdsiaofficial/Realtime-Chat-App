@@ -10,6 +10,8 @@ const Chat = () => {
   const location = useLocation()
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
+  const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState([])
 
   const ENDPOINT = `localhost:${PORT}`;
 
@@ -26,9 +28,9 @@ const Chat = () => {
     console.log(socket);
 
     socket.emit('join', { name, room }, () => {
-      
+
     });
-    
+
     return () => {
       socket.emit('disconnect');
       socket.off();
@@ -39,20 +41,40 @@ const Chat = () => {
   useEffect(() => {
     socket.on('message', (message) => {
       console.log(message)
+      setMessages([...messages, message]);
     })
-  },[])
+  }, [messages]);
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    
+    if (message) {
+      socket.emit('sendMessage', message, () => setMessage(''));
+    }
+  }
+
+
 
 
   return (
 
     <div>
       <div className='flex justify-center text-center items-center bg-gray-600'>
-        <h1 className=' text-5xl bg-purple-500 rounded-2xl p-3 absolute top-20 text-center'>Realtime Chat App</h1>
+        <h1 className=' text-5xl bg-purple-500 rounded-2xl p-3 absolute top-10 text-center'>Realtime Chat App</h1>
 
       </div>
 
-      <div className="joinOuterContainer flex justify-center text-center h-[100vh] items-center bg-gray-600">
-        
+      <div className="OuterContainer flex justify-center text-center h-[100vh] items-center bg-gray-600">
+        <div className="container">
+          <input
+            type="text"
+            name=""
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' ? sendMessage(e) : null}
+            id=""
+          />
+        </div>
       </div>
     </div>
 
